@@ -1,0 +1,16 @@
+
+body{
+background-color:rgb(216, 155, 155);
+}
+#cum{
+    margin: 18px;
+}
+#total-orders{
+background-color: aqua;
+}
+#orders-delivered{
+background-color: lightgreen;
+}
+#orders-pending{
+background-color: lightsalmon;
+}

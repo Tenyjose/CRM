@@ -1,0 +1,58 @@
+{% extends 'accounts/base.html'%}
+
+{% block body%}
+{% include "accounts/status.html"%}
+<div class="row mt-4" id="cum">
+    <div class="col-md-5">
+    <h3><strong>Customers</strong></h3>
+        <div class="card">
+            <div class="card-body">
+              <a href="" class="btn btn-primary btn-block">Create Coustomer</a>
+            </div>
+            <table class="table">
+                  <tr>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Order</th>
+                  </tr>
+                  {% for customer in customers%}
+                      <tr>
+                        <td><a href="{% url 'accounts:customer' customer.id %}">{{customer.name}}</a></td>
+                        <td>{{customer.phone}}</td>
+                      </tr>
+                  {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+
+      <h3><strong>  Orders</strong></h3>
+        <div class="card card-body">
+            <table class="table">
+                  <tr>
+                    <th scope="col">product</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Remove</th>
+                  </tr>
+                  {% for order in orders%}
+                  <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a href="{% url 'accounts:update_order' order.id%}">Update</a></td>
+                    <td><form action="{% url 'accounts:delete_order' order.id%}" method="POST">
+                          {%csrf_token%}
+                          <button type="submit" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                        </button>
+                        </form>
+                    </td>
+                  </tr>
+              {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock%}
